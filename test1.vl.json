@@ -1,0 +1,20 @@
+{
+    "layer": [
+      {
+        "mark": {
+          "type": "geoshape",
+          "fill": "#ddd",
+          "stroke": "#fff",
+          "strokeWidth": 1
+        },
+        "data": {
+          "url": "https://raw.githubusercontent.com/brechtv/looker_map_layers/master/world-countries-sans-antarctica.json",
+          "format": { "type": "topojson", "feature": "countries1" }
+        }
+      }
+    ],
+    "projection": { "type": "equirectangular" },
+    "width": 500,
+    "height": 250
+  }
+  
