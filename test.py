@@ -1,23 +1,11 @@
 import pandas as pd
 
 # 读取数据
-data = pd.read_csv('final_data.csv')
+data = pd.read_csv('updated_data_new.csv')
 
-# 创建一个函数来计算每个国家的 co2_emission_animal 和 co2_emission_non_animals 的值
-def calculate_emissions(df):
-    animal_category = 'Animal Products'
-    non_animal_category = 'Non-Animal Products'
+# 创建新的列来表示不同的档次
+bins = [0, 500, 1000, 1500, float('inf')]
+labels = ['0-500', '500-1000', '1000-1500', '1500+']
+data['co2_emission_range'] = pd.cut(data['co2_emission_all'], bins=bins, labels=labels)
 
-    co2_emission_animal = df[df['category'] == animal_category]['co2_emission_category'].iloc[0]
-    co2_emission_non_animals = df[df['category'] == non_animal_category]['co2_emission_category'].iloc[0]
-
-    df['co2_emission_animal'] = co2_emission_animal
-    df['co2_emission_non_animals'] = co2_emission_non_animals
-
-    return df
-
-# 按国家分组应用函数
-data = data.groupby('country').apply(calculate_emissions).reset_index(drop=True)
-
-# 保存修改后的数据到新的 CSV 文件
-data.to_csv('updated_data_new.csv', index=False)
+data.to_csv('updated_data.csv', index=False)

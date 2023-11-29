@@ -37,10 +37,16 @@
                   "lookup": "properties.name",
                   "from": {
                     "data": {
-                      "url": "https://raw.githubusercontent.com/Zhaohuan-Guo/vega-lite-Co2/main/updated_data.csv"
+                      "url": "https://raw.githubusercontent.com/Zhaohuan-Guo/vega-lite-Co2/main/updated_data_new.csv"
                     },
                     "key": "country",
-                    "fields": ["co2_emission_all","co2_emission","co2_emission_category","co2_emission_animal","co2_emission_non_animals"]
+                    "fields": [
+                      "co2_emission_all",
+                      "co2_emission",
+                      "co2_emission_category",
+                      "co2_emission_animal",
+                      "co2_emission_non_animals"
+                    ]
                   }
                 }
               ],
@@ -48,9 +54,17 @@
                 "color": { "field": "co2_emission_all", "type": "quantitative" },
                 "tooltip": [
                   { "field": "properties.name", "type": "nominal", "title": "country" },
-                  { "field": "co2_emission_all", "type": "nominal", "title": "CO2 emission"},
-                  { "field": "co2_emission_animal", "type": "nominal", "title": "Animal Product CO2 emission"},
-                  { "field": "co2_emission_non_animals", "type": "nominal", "title": "Non-Animal ProductCO2 emission"}
+                  { "field": "co2_emission_all", "type": "nominal", "title": "CO2 emission" },
+                  {
+                    "field": "co2_emission_animal",
+                    "type": "nominal",
+                    "title": "Animal Product CO2 emission"
+                  },
+                  {
+                    "field": "co2_emission_non_animals",
+                    "type": "nominal",
+                    "title": "Non-Animal ProductCO2 emission"
+                  }
                 ]
               }
             }
@@ -58,7 +72,16 @@
           "projection": { "type": "equirectangular" },
           "width": 500,
           "height": 200
+        },
+        {
+
+          "mark": "arc",
+          "encoding": {
+            "theta": { "field": "count", "type": "quantitative", "stack": true },
+            "color": { "field": "range", "type": "nominal", "scale": { "range": ["red", "green", "blue", "purple"] } }
+          }
         }
+        
       ]
     }
   ]
