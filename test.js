@@ -15,13 +15,11 @@ function processData(content) {
   const data = rows.map((row) => row.split(",")); // 按逗号分割列数据
 
   let dict = {};
-  for (let i = 1; i < data.length; i++) {
-    if(dict[data[i][0]]) {
-        data[i][6] = "0"
-    } else {
-        dict[data[i][0]] = 1
-    }
+  for (let i = 11; i < data.length; i+=11) {
+    data[i][6] = data[i-10][6]
+    data[i-10][6] = "0"
   }
+
 
   const processedData = data.map((row) => row.join(",")); // 将数据转换回CSV格式的行
 

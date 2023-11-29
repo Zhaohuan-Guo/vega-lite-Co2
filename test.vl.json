@@ -49,7 +49,7 @@
                     ]
                   }
                 },
-                {"filter": "datum.co2_emission_all > 0"}
+                {"filter": "datum.co2_emission_all >= 0"}
               ],
               "encoding": {
                 "color": { "field": "co2_emission_all", "type": "quantitative" },
