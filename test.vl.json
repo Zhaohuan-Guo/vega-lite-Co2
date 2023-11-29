@@ -48,7 +48,8 @@
                       "co2_emission_non_animals"
                     ]
                   }
-                }
+                },
+                {"filter": "datum.co2_emission_all > 0"}
               ],
               "encoding": {
                 "color": { "field": "co2_emission_all", "type": "quantitative" },
@@ -106,7 +107,7 @@
     {
       "mark": "bar",
       "transform": [
-        {"filter": {"field": "co2_emission_all", "lte": 500}} 
+        {"filter": "datum.co2_emission_all !== null && datum.co2_emission_all !== ''"} 
       ],
       "encoding": {
         "y": {"field": "co2_emission_all", "type": "quantitative", "title": "CO2 Emission All"},

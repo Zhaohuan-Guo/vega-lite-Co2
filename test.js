@@ -17,7 +17,7 @@ function processData(content) {
   let dict = {};
   for (let i = 1; i < data.length; i++) {
     if(dict[data[i][0]]) {
-        data[i][6] = ""
+        data[i][6] = "0"
     } else {
         dict[data[i][0]] = 1
     }
