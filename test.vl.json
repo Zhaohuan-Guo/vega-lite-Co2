@@ -49,7 +49,7 @@
                     ]
                   }
                 },
-                {"filter": "datum.co2_emission_all >= 0"}
+                {"filter": "datum.co2_emission_all > 0"}
               ],
               "encoding": {
                 "color": { "field": "co2_emission_all", "type": "quantitative" },
@@ -104,14 +104,31 @@
         }
       ]
     },
-    {
+    {"width": 950,
+    "height": 180,
       "mark": "bar",
       "transform": [
-        {"filter": "datum.co2_emission_all !== null && datum.co2_emission_all !== ''"} 
+        {"filter": "datum.co2_emission_all > 1000"}
       ],
       "encoding": {
         "y": {"field": "co2_emission_all", "type": "quantitative", "title": "CO2 Emission All"},
-        "x": {"field": "country", "type": "nominal", "title": "Country"}
+        "x": {"field": "country", "type": "nominal", "title": "Country","sort": {"op": "sum", "field": "co2_emission_all","order": "descending"}},
+        "tooltip": [
+          { "field": "country", "type": "nominal", "title": "country" },
+          { "field": "co2_emission_all", "type": "nominal", "title": "CO2 emission" },
+          {
+            "field": "co2_emission_animal",
+            "type": "nominal",
+            "title": "Animal Product CO2 emission"
+          },
+          {
+            "field": "co2_emission_non_animals",
+            "type": "nominal",
+            "title": "Non-Animal Product CO2 emission"
+          }
+
+        ]
+
       }
     }
   ]
