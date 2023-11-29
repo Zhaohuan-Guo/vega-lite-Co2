@@ -75,6 +75,9 @@
         },
         {
           "mark": "arc",
+          "transform": [
+            {"filter": "datum.co2_emission_range !== null && datum.co2_emission_range !== ''"} 
+          ],
           "encoding": {
             "theta": {
               "title": "number of country",
@@ -99,6 +102,16 @@
           }
         }
       ]
+    },
+    {
+      "mark": "bar",
+      "transform": [
+        {"filter": {"field": "co2_emission_all", "lte": 500}} 
+      ],
+      "encoding": {
+        "y": {"field": "co2_emission_all", "type": "quantitative", "title": "CO2 Emission All"},
+        "x": {"field": "country", "type": "nominal", "title": "Country"}
+      }
     }
   ]
 }
