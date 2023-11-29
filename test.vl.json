@@ -4,7 +4,6 @@
     "url": "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-18/food_consumption.csv",
     "format": { "type": "csv" }
   },
-
   "vconcat": [
     {
       "hconcat": [
@@ -38,7 +37,7 @@
                   "lookup": "properties.name",
                   "from": {
                     "data": {
-                      "url": "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-18/food_consumption.csv"
+                      "url": "https://raw.githubusercontent.com/Zhaohuan-Guo/vega-lite-Co2/main/co2_sum_per_country.csv"
                     },
                     "key": "country",
                     "fields": ["co2_emmission"]
@@ -49,34 +48,7 @@
                 "color": { "field": "co2_emmission", "type": "quantitative" },
                 "text": { "field": "country", "type": "nominal" }
               }
-            },
-            {
-                "mark": {
-                  "type": "geoshape",
-                  "stroke": "#000000",
-                  "strokeWidth": 0.5
-                },
-                "data": {
-                  "url": "https://raw.githubusercontent.com/brechtv/looker_map_layers/master/world-countries-sans-antarctica.json",
-                  "format": { "type": "topojson", "feature": "countries1" }
-                },
-                "transform": [
-                  {
-                    "lookup": "id",
-                    "from": {
-                      "data": {
-                        "url": "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-18/food_consumption.csv"
-                      },
-                      "key": "country",
-                      "fields": ["co2_emmission"]
-                    }
-                  }
-                ],
-                "encoding": {
-                  "color": { "field": "co2_emmission", "type": "quantitative" },
-                  "text": { "field": "country", "type": "nominal" }
-                }
-              }
+            }
           ],
           "projection": { "type": "equirectangular" },
           "width": 500,
