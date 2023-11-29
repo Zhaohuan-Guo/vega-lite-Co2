@@ -114,7 +114,7 @@
         "y": {"field": "co2_emission_all", "type": "quantitative", "title": "CO2 Emission All"},
         "x": {"field": "country", "type": "nominal", "title": "Country","sort": {"op": "sum", "field": "co2_emission_all","order": "descending"}},
         "tooltip": [
-          { "field": "country", "type": "nominal", "title": "country" },
+          { "field": "country", "type": "nominal", "title": "country(abbr)" },
           { "field": "co2_emission_all", "type": "nominal", "title": "CO2 emission" },
           {
             "field": "co2_emission_animal",
