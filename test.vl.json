@@ -43,7 +43,6 @@
                     "fields": [
                       "co2_emission_all",
                       "co2_emission",
-                      "co2_emission_category",
                       "co2_emission_animal",
                       "co2_emission_non_animals"
                     ]
@@ -112,9 +111,9 @@
       ],
       "encoding": {
         "y": {"field": "co2_emission_all", "type": "quantitative", "title": "CO2 Emission All"},
-        "x": {"field": "country", "type": "nominal", "title": "Country","sort": {"op": "sum", "field": "co2_emission_all","order": "descending"}},
+        "x": {"field": "country_abbr", "type": "nominal", "title": "Country","sort": {"op": "sum", "field": "co2_emission_all","order": "descending"}},
         "tooltip": [
-          { "field": "country", "type": "nominal", "title": "country(abbr)" },
+          { "field": "country_abbr", "type": "nominal", "title": "country(abbr)" },
           { "field": "co2_emission_all", "type": "nominal", "title": "CO2 emission" },
           {
             "field": "co2_emission_animal",
@@ -126,9 +125,7 @@
             "type": "nominal",
             "title": "Non-Animal Product CO2 emission"
           }
-
         ]
-
       }
     }
   ]
