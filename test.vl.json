@@ -48,7 +48,7 @@
                     ]
                   }
                 },
-                {"filter": "datum.co2_emission_all > 0"}
+                { "filter": "datum.co2_emission_all > 0" }
               ],
               "encoding": {
                 "color": { "field": "co2_emission_all", "type": "quantitative" },
@@ -76,7 +76,7 @@
         {
           "mark": "arc",
           "transform": [
-            {"filter": "datum.co2_emission_range !== null && datum.co2_emission_range !== ''"} 
+            { "filter": "datum.co2_emission_range !== null && datum.co2_emission_range !== ''" }
           ],
           "encoding": {
             "theta": {
@@ -103,17 +103,22 @@
         }
       ]
     },
-    {"width": 950,
-    "height": 180,
+    {
+      "width": 950,
+      "height": 180,
       "mark": "bar",
-      "transform": [
-        {"filter": "datum.co2_emission_all > 1000"}
-      ],
+      "transform": [{ "filter": "datum.co2_emission_all > 1000" }],
       "encoding": {
-        "y": {"field": "co2_emission_all", "type": "quantitative", "title": "CO2 Emission All"},
-        "x": {"field": "country_abbr", "type": "nominal", "title": "Country","sort": {"op": "sum", "field": "co2_emission_all","order": "descending"}},
+        "y": { "field": "co2_emission_all", "type": "quantitative", "title": "CO2 Emission All" },
+        "x": {
+          "field": "country_abbr",
+          "type": "nominal",
+          "title": "Country",
+          "sort": { "op": "sum", "field": "co2_emission_all", "order": "descending" },
+          "axis": {"labelAngle": 0}
+        },
         "tooltip": [
-          { "field": "country_abbr", "type": "nominal", "title": "country(abbr)" },
+          { "field": "country", "type": "nominal", "title": "country" },
           { "field": "co2_emission_all", "type": "nominal", "title": "CO2 emission" },
           {
             "field": "co2_emission_animal",
