@@ -10,18 +10,18 @@
         {
           "layer": [
             {
-                "mark": {
-                  "type": "geoshape",
-                  "fill":"white",
-                  "stroke": "#000",
-                  "strokeWidth": 1,
-                  "strokeOpacity": 0.5
-                },
-                "data": {
-                  "url": "https://raw.githubusercontent.com/brechtv/looker_map_layers/master/world-countries-sans-antarctica.json",
-                  "format": { "type": "topojson", "feature": "countries1" }
-                }
+              "mark": {
+                "type": "geoshape",
+                "fill": "white",
+                "stroke": "#000",
+                "strokeWidth": 1,
+                "strokeOpacity": 0.5
               },
+              "data": {
+                "url": "https://raw.githubusercontent.com/brechtv/looker_map_layers/master/world-countries-sans-antarctica.json",
+                "format": { "type": "topojson", "feature": "countries1" }
+              }
+            },
             {
               "mark": {
                 "type": "geoshape",
@@ -46,13 +46,16 @@
               ],
               "encoding": {
                 "color": { "field": "co2_emmission", "type": "quantitative" },
-                "text": { "field": "country", "type": "nominal" }
+                "tooltip": [
+                  { "field": "properties.name", "type": "nominal", "title": "country" },
+                  { "field": "co2_emmission", "type": "nominal", "title": "Tectonic Setting" }
+                ]
               }
             }
           ],
           "projection": { "type": "equirectangular" },
           "width": 500,
-          "height": 500
+          "height": 200
         }
       ]
     }
