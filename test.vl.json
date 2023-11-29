@@ -37,10 +37,10 @@
                   "lookup": "properties.name",
                   "from": {
                     "data": {
-                      "url": "https://raw.githubusercontent.com/Zhaohuan-Guo/vega-lite-Co2/main/co2_sum_per_country.csv"
+                      "url": "https://raw.githubusercontent.com/Zhaohuan-Guo/vega-lite-Co2/main/final_data.csv"
                     },
                     "key": "country",
-                    "fields": ["co2_emmission"]
+                    "fields": ["co2_emmission_all"]
                   }
                 }
               ],

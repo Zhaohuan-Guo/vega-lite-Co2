@@ -1,4 +1,4 @@
-country,food_category,consumption,co2_emmission,category,co2_emmission_category,co2_emmission_all
+country,food_category,consumption,co2_emission,category,co2_emission_category,co2_emission_all
 Argentina,Pork,10.51,37.2,Animal Products,2140.65,2172.4
 Argentina,Poultry,38.66,41.53,Animal Products,2140.65,2172.4
 Argentina,Beef,55.48,1712.0,Animal Products,2140.65,2172.4
