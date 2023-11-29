@@ -104,6 +104,7 @@
       ]
     },
     {
+      "params": [{"name": "data_selection", "select": {"type": "point", "toggle": false, "fields": ["country_abbr"]}}],
       "width": 950,
       "height": 180,
       "mark": "bar",
@@ -116,6 +117,42 @@
           "title": "Country",
           "sort": { "op": "sum", "field": "co2_emission_all", "order": "descending" },
           "axis": {"labelAngle": 0}
+        },
+        "color": {
+          "condition": {"param": "data_selection", "value": "steelblue"},
+          "value": "#e3e3e3"
+        },
+        "tooltip": [
+          { "field": "country", "type": "nominal", "title": "country" },
+          { "field": "co2_emission_all", "type": "nominal", "title": "CO2 emission" },
+          {
+            "field": "co2_emission_animal",
+            "type": "nominal",
+            "title": "Animal Product CO2 emission"
+          },
+          {
+            "field": "co2_emission_non_animals",
+            "type": "nominal",
+            "title": "Non-Animal Product CO2 emission"
+          }
+        ]
+      }
+    },    {
+      "params": [{"name": "data_selection", "select": {"type": "point", "toggle": false, "fields": ["country_abbr"]}}],
+      "width": 950,
+      "height": 180,
+      "mark": "bar",
+      "transform": [{ "filter": "datum.country == 'Argentina'" }],
+      "encoding": {
+        "y": { "field": "co2_emission", "type": "quantitative", "title": "CO2 Emission All" },
+        "x": {
+          "field": "food_category",
+          "type": "nominal",
+          "axis": {"labelAngle": 0}
+        },
+        "color": {
+          "condition": {"param": "data_selection", "value": "steelblue"},
+          "value": "#e3e3e3"
         },
         "tooltip": [
           { "field": "country", "type": "nominal", "title": "country" },
