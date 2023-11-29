@@ -40,15 +40,17 @@
                       "url": "https://raw.githubusercontent.com/Zhaohuan-Guo/vega-lite-Co2/main/final_data.csv"
                     },
                     "key": "country",
-                    "fields": ["co2_emmission_all"]
+                    "fields": ["co2_emission_all","co2_emission","co2_emission_category","category"]
                   }
                 }
               ],
               "encoding": {
-                "color": { "field": "co2_emmission", "type": "quantitative" },
+                "color": { "field": "co2_emission_all", "type": "quantitative" },
                 "tooltip": [
                   { "field": "properties.name", "type": "nominal", "title": "country" },
-                  { "field": "co2_emmission", "type": "nominal", "title": "Tectonic Setting" }
+                  { "field": "co2_emission_all", "type": "nominal", "title": "CO2 emission"},
+                  { "field": "co2_emission", "type": "nominal", "title": "Animal Product CO2 emission"},
+                  { "field": "co2_emission", "type": "nominal", "title": "Non-Animal ProductCO2 emission"}
                 ]
               }
             }

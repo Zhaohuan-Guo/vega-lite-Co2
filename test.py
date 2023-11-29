@@ -1,10 +1,19 @@
 import pandas as pd
 
-# 读取两个数据集
-data1 = pd.read_csv('new_data_1.csv')
-data2 = pd.read_csv('co2_sum_per_country.csv')
+# 读取数据
+data = pd.read_csv('final_data.csv')
 
-# 根据 'country' 和 'food_category' 列合并两个数据集
-merged_data = pd.merge(data1, data2, on=['country'])
+# 计算每个国家的 co2_emission_animal 和 co2_emission_non_animals 的值
+animal_category = 'Animal Products'
+non_animal_category = 'Non-Animal Products'
 
-merged_data.to_csv('new_data_1.csv', index=False)
+# 计算 co2_emission_animal 和 co2_emission_non_animals 的值
+co2_emission_animal = data[data['category'] == animal_category]['co2_emission_category'].iloc[0]
+co2_emission_non_animals = data[data['category'] == non_animal_category]['co2_emission_category'].iloc[0]
+
+# 为每个国家填充 co2_emission_animal 和 co2_emission_non_animals 的值
+data['co2_emission_animal'] = co2_emission_animal
+data['co2_emission_non_animals'] = co2_emission_non_animals
+
+# 保存修改后的数据到新的 CSV 文件
+data.to_csv('updated_data.csv', index=False)
