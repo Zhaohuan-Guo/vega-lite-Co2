@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "data": {
-    "url": "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-02-18/food_consumption.csv",
+    "url": "https://raw.githubusercontent.com/Zhaohuan-Guo/vega-lite-Co2/main/updated_data.csv",
     "format": { "type": "csv" }
   },
   "vconcat": [
@@ -37,7 +37,7 @@
                   "lookup": "properties.name",
                   "from": {
                     "data": {
-                      "url": "https://raw.githubusercontent.com/Zhaohuan-Guo/vega-lite-Co2/main/updated_data_new.csv"
+                      "url": "https://raw.githubusercontent.com/Zhaohuan-Guo/vega-lite-Co2/main/updated_data.csv"
                     },
                     "key": "country",
                     "fields": [
@@ -74,14 +74,30 @@
           "height": 200
         },
         {
-
           "mark": "arc",
           "encoding": {
-            "theta": { "field": "count", "type": "quantitative", "stack": true },
-            "color": { "field": "range", "type": "nominal", "scale": { "range": ["red", "green", "blue", "purple"] } }
+            "theta": {
+              "title": "number of country",
+              "aggregate": "count",
+              "field": "country",
+              "type": "quantitative"
+            },
+            "color": {
+              "field": "co2_emission_range",
+              "type": "nominal",
+              "scale": { "range": ["#ecf8bc", "#85cfbb", "#2f9ebf", "#2c3e81"] }
+            },
+            "tooltip": [
+              {
+                "title": "number of country",
+                "aggregate": "count",
+                "field": "country",
+                "type": "quantitative",
+                "format": ""
+              }
+            ]
           }
         }
-        
       ]
     }
   ]

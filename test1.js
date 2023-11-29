@@ -1,0 +1,1 @@
+console.log('co2_emission_non_animals\r')
