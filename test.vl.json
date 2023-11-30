@@ -23,6 +23,7 @@
               }
             },
             {
+              "title":"CO2 Emission Map",
               "params": [
                 {
                   "name": "data_selection",
@@ -61,18 +62,22 @@
                   }
                 },
                 { "filter": "datum.co2_emission_all > 0" },
-                { "filter": { "param": "spt" } },
-                { "filter": { "param": "pts" } }
+                { "filter": { "param": "spt" } }
               ],
               "encoding": {
-                "color": { "field": "co2_emission_all", "type": "quantitative" },
+                "color": {
+                  "field": "co2_emission_all",
+                  "title":"CO2 Emission(Kg/person/year)",
+                  "type": "quantitative",
+                  "condition": { "test": { "not": { "param": "pts" }}, "value": "#e3e3e3" }
+                },
                 "tooltip": [
                   { "field": "properties.name", "type": "nominal", "title": "country" },
-                  { "field": "co2_emission_all", "type": "nominal", "title": "CO2 emission" },
+                  { "field": "co2_emission_all", "type": "nominal", "title": "CO2 Emission" },
                   {
                     "field": "co2_emission_animal",
                     "type": "nominal",
-                    "title": "Animal Product CO2 emission"
+                    "title": "Animal Product CO2 Emission"
                   },
                   {
                     "field": "co2_emission_non_animals",
@@ -88,11 +93,14 @@
           "height": 250
         },
         {
-          "params": [{ "name": "pts", "select": {"type": "point","fields": ["co2_emission_range"]}}],
+          "title": "CO2 Emission Rank Ratio",
+          "params": [
+            { "name": "pts", "select": { "type": "point", "fields": ["co2_emission_range"] } }
+          ],
           "height": 250,
           "mark": {
             "type": "arc",
-            "padAngle":0.01
+            "padAngle": 0.01
           },
           "transform": [
             { "filter": "datum.co2_emission_range !== null && datum.co2_emission_range !== ''" }
@@ -106,8 +114,9 @@
             },
             "color": {
               "field": "co2_emission_range",
+              "title":"Range",
               "type": "nominal",
-              "scale": { "range": ["#ecf8bc", "#85cfbb", "#2f9ebf", "#2c3e81"] },
+              "scale": { "range": ["#ecf8bc", "#2f9ebf", "#2c3e81", "#85cfbb"] },
               "condition": {
                 "test": { "not": { "param": "pts" } },
                 "value": "#e3e3e3"
@@ -115,11 +124,14 @@
             },
             "tooltip": [
               {
-                "title": "number of country",
+                "title": "Number of Country",
                 "aggregate": "count",
                 "field": "country",
-                "type": "quantitative",
-                "format": ""
+                "type": "quantitative"
+              },{
+                "title":"Rank",
+                "field":"co2_emission_range",
+                "type": "nominal"
               }
             ]
           }
@@ -137,10 +149,17 @@
           "select": { "type": "point", "on": "click", "fields": ["country"] }
         }
       ],
-      "width": 1000,
+      "width": 1200,
       "height": 100,
       "mark": "bar",
-      "transform": [{ "filter": "datum.co2_emission_all > 1000" },{ "filter": { "param": "pts" } }],
+      "transform": [{"filter":{"param": "pts"}},
+        {
+          "window": [{"op":"row_number", "as": "tag_rank"}]
+        },
+        {"filter":"datum.tag_rank < 441"},
+        {"filter":"datum.co2_emission_all > 0"}
+        
+      ],
       "encoding": {
         "y": { "field": "co2_emission_all", "type": "quantitative", "title": "CO2 Emission All" },
         "x": {
@@ -156,31 +175,32 @@
         },
         "tooltip": [
           { "field": "country", "type": "nominal", "title": "country" },
-          { "field": "co2_emission_all", "type": "nominal", "title": "CO2 emission" },
+          { "field": "co2_emission_all", "type": "nominal", "title": "CO2 Emission" },
           {
             "field": "co2_emission_animal",
             "type": "nominal",
-            "title": "Animal Product CO2 emission"
+            "title": "Animal Product CO2 Emission"
           },
           {
             "field": "co2_emission_non_animals",
             "type": "nominal",
-            "title": "Non-Animal Product CO2 emission"
+            "title": "Non-Animal Product CO2 Emission"
           }
         ]
       }
     },
     {
-      "width": 1000,
+      "width": 1200,
       "height": 100,
       "mark": "bar",
-      "transform": [{ "filter": { "param": "spt" } },{ "filter": { "param": "pts" } }],
+      "transform": [{ "filter": { "param": "spt" } }],
       "encoding": {
-        "y": { "field": "co2_emission", "type": "quantitative", "title": "CO2 Emission All" },
+        "y": { "field": "co2_emission", "type": "quantitative", "title": "CO2 Emission" },
         "x": {
           "field": "food_category",
           "type": "nominal",
-          "axis": { "labelAngle": 0 }
+          "axis": { "labelAngle": 0 },
+          "title":"CO2 Emission of categaries"
         },
         "color": {
           "condition": { "param": "data_selection", "value": "steelblue" },
@@ -188,16 +208,10 @@
         },
         "tooltip": [
           { "field": "country", "type": "nominal", "title": "country" },
-          { "field": "co2_emission_all", "type": "nominal", "title": "CO2 emission" },
           {
-            "field": "co2_emission_animal",
+            "field": "co2_emission",
             "type": "nominal",
-            "title": "Animal Product CO2 emission"
-          },
-          {
-            "field": "co2_emission_non_animals",
-            "type": "nominal",
-            "title": "Non-Animal Product CO2 emission"
+            "title": "co2_emission"
           }
         ]
       }
