@@ -1,5 +1,5 @@
 const fs = require("fs");
-const countryList = require("country-list");
+const countryList = require('country-list');
 
 // 读取CSV文件
 fs.readFile("updated_data.csv", "utf8", (err, data) => {
@@ -15,11 +15,12 @@ function processData(content) {
   const rows = content.split("\n"); // 按行分割
   const data = rows.map((row) => row.split(",")); // 按逗号分割列数据
 
-
-  data[0][5] = "country_abbr";
-  for (let i = 1; i < data.length; i++) {
-    data[i][5] = countryList.getCode(data[i][0]);
+  let dict = {};
+  for (let i = 11; i < data.length; i+=11) {
+    data[i][9] = data[i-10][9]
+    data[i-10][9] = ""
   }
+
 
   const processedData = data.map((row) => row.join(",")); // 将数据转换回CSV格式的行
 

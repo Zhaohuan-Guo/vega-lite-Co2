@@ -23,6 +23,16 @@
               }
             },
             {
+              "params": [
+                {
+                  "name": "data_selection",
+                  "select": { "type": "point", "toggle": false, "fields": ["country"] }
+                },
+                {
+                  "name": "spt",
+                  "select": { "type": "point", "on": "click", "fields": ["country"] }
+                }
+              ],
               "mark": {
                 "type": "geoshape",
                 "stroke": "#000000",
@@ -41,14 +51,18 @@
                     },
                     "key": "country",
                     "fields": [
+                      "country",
                       "co2_emission_all",
                       "co2_emission",
                       "co2_emission_animal",
-                      "co2_emission_non_animals"
+                      "co2_emission_non_animals",
+                      "co2_emission_range"
                     ]
                   }
                 },
-                { "filter": "datum.co2_emission_all > 0" }
+                { "filter": "datum.co2_emission_all > 0" },
+                { "filter": { "param": "spt" } },
+                { "filter": { "param": "pts" } }
               ],
               "encoding": {
                 "color": { "field": "co2_emission_all", "type": "quantitative" },
@@ -70,11 +84,16 @@
             }
           ],
           "projection": { "type": "equirectangular" },
-          "width": 500,
-          "height": 200
+          "width": 600,
+          "height": 250
         },
         {
-          "mark": "arc",
+          "params": [{ "name": "pts", "select": {"type": "point","fields": ["co2_emission_range"]}}],
+          "height": 250,
+          "mark": {
+            "type": "arc",
+            "padAngle":0.01
+          },
           "transform": [
             { "filter": "datum.co2_emission_range !== null && datum.co2_emission_range !== ''" }
           ],
@@ -88,7 +107,11 @@
             "color": {
               "field": "co2_emission_range",
               "type": "nominal",
-              "scale": { "range": ["#ecf8bc", "#85cfbb", "#2f9ebf", "#2c3e81"] }
+              "scale": { "range": ["#ecf8bc", "#85cfbb", "#2f9ebf", "#2c3e81"] },
+              "condition": {
+                "test": { "not": { "param": "pts" } },
+                "value": "#e3e3e3"
+              }
             },
             "tooltip": [
               {
@@ -104,11 +127,20 @@
       ]
     },
     {
-      "params": [{"name": "data_selection", "select": {"type": "point", "toggle": false, "fields": ["country_abbr"]}}],
-      "width": 950,
-      "height": 180,
+      "params": [
+        {
+          "name": "data_selection",
+          "select": { "type": "point", "toggle": false, "fields": ["country_abbr"] }
+        },
+        {
+          "name": "spt",
+          "select": { "type": "point", "on": "click", "fields": ["country"] }
+        }
+      ],
+      "width": 1000,
+      "height": 100,
       "mark": "bar",
-      "transform": [{ "filter": "datum.co2_emission_all > 1000" }],
+      "transform": [{ "filter": "datum.co2_emission_all > 1000" },{ "filter": { "param": "pts" } }],
       "encoding": {
         "y": { "field": "co2_emission_all", "type": "quantitative", "title": "CO2 Emission All" },
         "x": {
@@ -116,10 +148,10 @@
           "type": "nominal",
           "title": "Country",
           "sort": { "op": "sum", "field": "co2_emission_all", "order": "descending" },
-          "axis": {"labelAngle": 0}
+          "axis": { "labelAngle": 0 }
         },
         "color": {
-          "condition": {"param": "data_selection", "value": "steelblue"},
+          "condition": { "param": "data_selection", "value": "steelblue" },
           "value": "#e3e3e3"
         },
         "tooltip": [
@@ -137,21 +169,21 @@
           }
         ]
       }
-    },    {
-      "params": [{"name": "data_selection", "select": {"type": "point", "toggle": false, "fields": ["country_abbr"]}}],
-      "width": 950,
-      "height": 180,
+    },
+    {
+      "width": 1000,
+      "height": 100,
       "mark": "bar",
-      "transform": [{ "filter": "datum.country == 'Argentina'" }],
+      "transform": [{ "filter": { "param": "spt" } },{ "filter": { "param": "pts" } }],
       "encoding": {
         "y": { "field": "co2_emission", "type": "quantitative", "title": "CO2 Emission All" },
         "x": {
           "field": "food_category",
           "type": "nominal",
-          "axis": {"labelAngle": 0}
+          "axis": { "labelAngle": 0 }
         },
         "color": {
-          "condition": {"param": "data_selection", "value": "steelblue"},
+          "condition": { "param": "data_selection", "value": "steelblue" },
           "value": "#e3e3e3"
         },
         "tooltip": [
